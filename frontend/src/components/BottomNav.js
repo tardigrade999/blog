@@ -5,54 +5,56 @@ import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
 
-const BottomNav = ({nextSlug, prevSlug}) => {
 
-  console.log('nextSlug', nextSlug)
-  console.log('prevSlug', prevSlug)
+const StyledButton = styled(Button)`
+  border: 2px solid ${({theme}) => theme.global.colors['light-1']};
+  :hover {
+   border: 2px solid ${({theme}) => theme.global.colors.secondary};
+   color: ${({theme}) => theme.global.colors.secondary};
+   box-shadow: none;
+  }
+`
+
+
+const NavButton = ({label, slug}) => {
+  return (
+      slug ? (
+        <Link to={`/${slug}`}>
+          <StyledButton
+            default
+            label={label}
+            focusIndicator={false}
+          />
+        </Link>
+      ) : (
+        <StyledButton
+          default
+          disabled={true}
+          label={label}
+          focusIndicator={false}
+        />
+      )
+  )
+}
+
+
+const BottomNav = ({nextSlug, prevSlug}) => {
 
   return (
       <Box
+        width={'66%'}
         flex
         direction='row'
+        justify='between'
       >
-        {
-          prevSlug ? (
-            <Link to={`/${prevSlug}`}>
-              <Button
-                secondary
-                label="Previous"
-              />
-            </Link>
-          ) : (
-            <Button
-              secondary
-              active='false'
-              label="Previous"
-            />
-          )
-        }
+        <NavButton label="Past" slug={prevSlug} />
         <Link to="/">
-          <Button
-            secondary
+          <StyledButton
+            default
             label="Home"
           />
         </Link>
-        {
-          nextSlug ? (
-            <Link to={`/${nextSlug}`}>
-              <Button
-                secondary
-                label="Next"
-              />
-            </Link>
-          ) : (
-            <Button
-              secondary
-              label="Next"
-              active="false"
-            />
-          )
-        }
+        <NavButton label="Future" slug={nextSlug} />
       </Box>
   )
 }

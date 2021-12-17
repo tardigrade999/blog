@@ -43,9 +43,6 @@ const theme = deepMerge(grommet, {
       },
     },
   },
-  // anchor: {
-  //   color: "#ffffff",
-  // }
 });
 
 export function App() {
