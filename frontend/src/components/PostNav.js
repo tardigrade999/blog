@@ -38,14 +38,18 @@ const NavButton = ({label, slug}) => {
 }
 
 
-const BottomNav = ({nextSlug, prevSlug}) => {
+const PostNav = ({nextSlug, prevSlug}) => {
 
   return (
       <Box
-        width={'66%'}
+        width={'55%'}
         flex
         direction='row'
         justify='between'
+        margin={{
+          "top": "large",
+          "bottom": "large",
+        }}
       >
         <NavButton label="Past" slug={prevSlug} />
         <Link to="/">
@@ -59,4 +63,4 @@ const BottomNav = ({nextSlug, prevSlug}) => {
   )
 }
 
-export default BottomNav;
+export default PostNav;

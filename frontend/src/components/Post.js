@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import { Main, Heading, Paragraph, Text } from "grommet";
 
 import Header from "./Header";
-import BottomNav from "./BottomNav";
+import PostNav from "./PostNav";
 
 import { fetchPostBySlug, fetchSlugOfNextPost, fetchSlugOfPrevPost } from "../queries/fetchPosts";
 
@@ -84,11 +84,15 @@ const Post = () => {
       <Main pad="large" direction="column" align="center">
         <PostHeader>{post.title}</PostHeader>
         <Text>{published}</Text>
+        <PostNav
+          nextSlug={nextSlug?.data}
+          prevSlug={prevSlug?.data}
+        />
         <PostBody
           size="large"
           dangerouslySetInnerHTML={{ __html: formattedHtml || html }}
         />
-        <BottomNav
+        <PostNav
           nextSlug={nextSlug?.data}
           prevSlug={prevSlug?.data}
         />
