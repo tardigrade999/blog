@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+
+  ghost:
+    image: ghost
+    ports:
+      - "2368:2368"
+    volumes:
+      - content:/var/lib/ghost/content
+
+  react:
+    build: ./frontend
+    ports:
+      - "3000:80"
+
+volumes:
+  content: {}
