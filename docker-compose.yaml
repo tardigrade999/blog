@@ -10,9 +10,12 @@ services:
       - content:/var/lib/ghost/content
 
   react:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
     ports:
-      - "3000:80"
+      - "3000:1234"
+      - "1235:1235"
 
 volumes:
   content: {}
