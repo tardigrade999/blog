@@ -48,21 +48,15 @@ const PostBody = styled(Paragraph)`
   }
 `;
 
-const formatHtml = html => {
-  // add target="_blank" to all links
-  let formatted = html;
-  formatted = formatted?.replace(/<a/g, `<a target="_blank"`);
-  // remove all <hr /> tags
-  formatted = formatted?.replace(/<hr\s*\/?>/g, "");
-  return formatted;
 
-}
 
 const Post = () => {
 
   // scroll to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
+    // rerender latex in dynamically loaded content
+    window.MathJax.typeset();
   })
 
   const { slug } = useParams();
@@ -82,10 +76,11 @@ const Post = () => {
 
   const html = post?.html;
 
-  const formattedHtml = formatHtml(html);
+  const formattedHtml = post?.formattedHtml;
+
 
   return (
-    <div className="post" id="slug">
+    <div id={slug}>
       <Header color="primary" title="Theory In Practice" />
       <Main pad="large" direction="column" align="center">
         <PostHeader>{post.title}</PostHeader>
@@ -94,10 +89,11 @@ const Post = () => {
           nextSlug={nextSlug?.data}
           prevSlug={prevSlug?.data}
         />
-        <PostBody
-          size="large"
-          dangerouslySetInnerHTML={{ __html: formattedHtml || html }}
-        />
+          <PostBody
+            className={'post-body'}
+            size="large"
+            dangerouslySetInnerHTML={{ __html: formattedHtml || html }}
+          />
         <PostNav
           nextSlug={nextSlug?.data}
           prevSlug={prevSlug?.data}
