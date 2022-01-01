@@ -26,6 +26,11 @@ const Wrapper = styled(Box)`
   :hover {
     background-color: ${props => props.theme.global.colors.backgroundFront};
   }
+  :focus {
+    box-shadow: none;
+    border: 1px solid ${props => props.theme.global.colors['light-2']};
+  }
+
 `
 
 const PostPreview = ({ post, i }) => {
